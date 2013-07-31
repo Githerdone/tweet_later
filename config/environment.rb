@@ -35,8 +35,11 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
 
-ENV['TWITTER_KEY'] = 'ZnjZArDXcw2GTlQ9ZxOVhg'
-ENV['TWITTER_SECRET'] = 'TC5ZkDuiBxyNikdbjHNDzvPLYKYepHBXKI5nMWcI'
+env_config = YAML.load_file(APP_ROOT.join('config','twitter.yaml'))
+
+env_config.each do |key,value|
+  ENV[key] = value
+end
 
 Twitter.configure do |config|
   config.consumer_key = ENV['TWITTER_KEY']
