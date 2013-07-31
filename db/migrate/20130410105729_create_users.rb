@@ -7,5 +7,10 @@ class CreateUsers < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    create_table :tweets do |t|
+      t.string :status
+      t.belongs_to :user
+    end
   end
 end
